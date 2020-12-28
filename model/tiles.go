@@ -1,15 +1,14 @@
 package model
 
 import (
-	"context"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"strconv"
 
-	"github.com/ginfolderstructure/database"
 	"github.com/go-redis/redis"
+	"github.com/local-server-test1/database"
 	arm "github.com/synspective/syns-arms/pkg/sdk"
 	"github.com/synspective/syns-arms/pkg/sdk/customer"
 )
@@ -20,7 +19,7 @@ func GetTiles(service string, uuid string, timestamp string, z uint64, x uint64,
 	layer := fmt.Sprintf("%s_%s_%s", service, uuid, timestamp)
 
 	// Check cache
-	hgetRes := rds.HGet(context.Background(), layer, tck)
+	hgetRes := rds.HGet(layer, tck)
 
 	hit := hgetRes.Err() != redis.Nil && hgetRes.Err() == nil
 	if hgetRes.Err() != redis.Nil && hgetRes.Err() != nil {
@@ -52,7 +51,7 @@ func GetTiles(service string, uuid string, timestamp string, z uint64, x uint64,
 
 		if len(data) != 0 {
 			// Cache data
-			hsetRes := rds.HSet(context.Background(), layer, tck, data)
+			hsetRes := rds.HSet(layer, tck, data)
 			println("cache in redis, ----------------------->")
 			if hsetRes.Err() != redis.Nil && hsetRes.Err() != nil {
 				// Don't error out but log it

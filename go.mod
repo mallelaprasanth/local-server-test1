@@ -1,4 +1,4 @@
-module ginfolderstructure
+module github.com/local-server-test1
 
 go 1.15
 
@@ -9,5 +9,6 @@ require (
 	github.com/lib/pq v1.9.0
 	github.com/onsi/ginkgo v1.14.2 // indirect
 	github.com/onsi/gomega v1.10.4 // indirect
+	github.com/stretchr/testify v1.5.1 // indirect
 	google.golang.org/grpc v1.34.0
 )

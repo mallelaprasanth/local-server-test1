@@ -7,8 +7,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/ginfolderstructure/lib"
-	"github.com/ginfolderstructure/model"
+	"github.com/local-server-test1/lib"
+	"github.com/local-server-test1/model"
 )
 
 func GetTiles(c *gin.Context) {

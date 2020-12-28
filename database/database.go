@@ -61,6 +61,22 @@ func Init() {
 	}
 }
 
+func TestInit() {
+	// port, err := strconv.ParseUint(os.Getenv("PG_PORT"), 10, 32)
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s "+
+		"password=%s dbname=%s sslmode=disable",
+		os.Getenv("PG_HOST"), os.Getenv("PG_PORT"), os.Getenv("PG_USER"), os.Getenv("PG_PASS"), os.Getenv("PG_DBNAME"))
+
+	err := Connect(psqlInfo)
+	if err != nil {
+		panic(err)
+	}
+	err = ConnectRedis()
+	if err != nil {
+		panic(err)
+	}
+}
+
 // GetDB is called in models
 func GetConnection() *sql.DB {
 	return conn

@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/ginfolderstructure/api"
-	"github.com/ginfolderstructure/database"
+	"github.com/local-server-test1/api"
+	"github.com/local-server-test1/database"
 )
 
 func main() {
