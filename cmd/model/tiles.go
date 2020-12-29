@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"github.com/go-redis/redis"
-	"github.com/synspective/local-server-test1/database"
+	"github.com/local-server-test1/database"
 )
 
 // get tile data from postgres
