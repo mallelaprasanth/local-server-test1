@@ -10,6 +10,6 @@ require (
 	github.com/lib/pq v1.9.0
 	github.com/onsi/ginkgo v1.14.2 // indirect
 	github.com/onsi/gomega v1.10.4 // indirect
-	github.com/synspective/syns-arms v1.1.16
+	// github.com/synspective/syns-arms v1.1.16
 	google.golang.org/grpc v1.34.0
 )
