@@ -34,4 +34,5 @@ func main() {
 	database.Init()
 	r.Run(":7778")
 	database.Close()
+
 }
