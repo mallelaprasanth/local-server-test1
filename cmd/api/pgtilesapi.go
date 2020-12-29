@@ -7,8 +7,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/local-server-test1/lib"
-	"github.com/local-server-test1/model"
+	"github.com/synspective/local-server-test1/lib"
+	"github.com/synspective/local-server-test1/model"
 )
 
 // api to get the tile data from postgres

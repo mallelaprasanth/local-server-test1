@@ -1,0 +1,128 @@
+<html>
+<head>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    body, html {width: '100%'; height: '100%'; padding: 0; margin: 0;}
+  </style>
+</head>
+<body>
+  <div id='map' style='width: 100%; height: 100%;'></div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic2hzdXQiLCJhIjoiY2tiZnhxOXJxMHVndTJxcXE2MzF6bGZubyJ9.yHeyBNmvKw0J1hmeru2nag';
+    AuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEzLCJlbWFpbCI6InN1YnNpZGVuY2VAc3luc3BlY3RpdmUuaW8iLCJuYW1lIjoiTGFuZCBTdWJzIiwiZXhwIjoxNjI4MTQ0NzQ2LCJpc3MiOiJhcmcifQ.ZPp_Yi9jnP7innE-ulZ9oMC2auIDCKBzT3OLR8EU3kA'
+    
+    var map = new mapboxgl.Map({
+      container: 'map',
+      zoom: 5,
+      center: [
+        137.97834760987658,
+        37.55117739361476
+      ],
+      style: 'mapbox://styles/mapbox/streets-v11',
+      hash: false,
+      transformRequest: (url, resourceType)=> {
+        return {
+          url: url,
+          headers: { 'Accept-Encoding': 'gzip' }
+        }
+      }
+    });
+
+    layers = {
+      "urban_4294967819_20180701": "{{host_url}}/v1/urban/4294967819/20180701/{z}/{x}/{y}",
+      // "nightlight_4294967779_20170301": "{{host_url}}/v1/nightlight/4294967779/20170301/{z}/{x}/{y}",
+      // "aerosol_4294967779_20190401": "{{host_url}}/v1/aerosol/4294967779/20190401/{z}/{x}/{y}",
+      // "aerosol_4294967779_20170201": "{{host_url}}/v1/aerosol/4294967779/20170201/{z}/{x}/{y}",
+      // "aerosol_117_20190401": "{{host_url}}/v1/aerosol/117/20190401/{z}/{x}/{y}",
+      // "20190401": "{{host_url}}/v1/aerosol/117/20190401/{z}/{x}/{y}",
+      // "aerosol_117_20170101": "{{host_url}}/v1/aerosol/117/20170101/{z}/{x}/{y}",
+      // "ghi_117_20180801": "{{host_url}}/v1/ghi/117/20180801/{z}/{x}/{y}",
+      // "urban_117_20200101": "{{host_url}}/v1/urban/117/20200101/{z}/{x}/{y}",
+      // "nightlight_117_20180801": "{{host_url}}/v1/nightlight/117/20180801/{z}/{x}/{y}",
+      // "nightlight_4294967819_20180801": "{{host_url}}/v1/nightlight/4294967819/20180801/{z}/{x}/{y}",
+      // "aerosol_4294967779": "{{host_url}}/v1/aerosol/4294967779/{z}/{x}/{y}",
+      // "aerosol_4294967780": "{{host_url}}/v1/aerosol/4294967780/{z}/{x}/{y}",
+      // "aerosol_4294967781": "{{host_url}}/v1/aerosol/4294967781/{z}/{x}/{y}",
+      // "aerosol_4294967782": "{{host_url}}/v1/aerosol/4294967782/{z}/{x}/{y}",
+      // "aerosol_4294967783": "{{host_url}}/v1/aerosol/4294967783/{z}/{x}/{y}",
+      // "aerosol_4294967784": "{{host_url}}/v1/aerosol/4294967784/{z}/{x}/{y}",
+      // "aerosol_4294967785": "{{host_url}}/v1/aerosol/4294967785/{z}/{x}/{y}",
+      // "aerosol_4294967786": "{{host_url}}/v1/aerosol/4294967786/{z}/{x}/{y}",
+      // "aerosol_4294967787": "{{host_url}}/v1/aerosol/4294967787/{z}/{x}/{y}",
+      // "aerosol_4294967788": "{{host_url}}/v1/aerosol/4294967788/{z}/{x}/{y}",
+      // "aerosol_4294967789": "{{host_url}}/v1/aerosol/4294967789/{z}/{x}/{y}",
+      // "aerosol_4294967790": "{{host_url}}/v1/aerosol/4294967790/{z}/{x}/{y}",
+      // "aerosol_4294967791": "{{host_url}}/v1/aerosol/4294967791/{z}/{x}/{y}",
+      // "aerosol_4294967792": "{{host_url}}/v1/aerosol/4294967792/{z}/{x}/{y}",
+      // "aerosol_4294967793": "{{host_url}}/v1/aerosol/4294967793/{z}/{x}/{y}",
+      // "aerosol_4294967794": "{{host_url}}/v1/aerosol/4294967794/{z}/{x}/{y}",
+      // "aerosol_4294967795": "{{host_url}}/v1/aerosol/4294967795/{z}/{x}/{y}",
+      // "aerosol_4294967796": "{{host_url}}/v1/aerosol/4294967796/{z}/{x}/{y}",
+      // "aerosol_4294967797": "{{host_url}}/v1/aerosol/4294967797/{z}/{x}/{y}",
+      // "aerosol_4294967798": "{{host_url}}/v1/aerosol/4294967798/{z}/{x}/{y}",
+      // "aerosol_4294967799": "{{host_url}}/v1/aerosol/4294967799/{z}/{x}/{y}",
+      // "aerosol_4294967800": "{{host_url}}/v1/aerosol/4294967800/{z}/{x}/{y}",
+      // "aerosol_4294967801": "{{host_url}}/v1/aerosol/4294967801/{z}/{x}/{y}",
+      // "aerosol_4294967802": "{{host_url}}/v1/aerosol/4294967802/{z}/{x}/{y}",
+      // "aerosol_4294967803": "{{host_url}}/v1/aerosol/4294967803/{z}/{x}/{y}",
+      // "aerosol_4294967804": "{{host_url}}/v1/aerosol/4294967804/{z}/{x}/{y}",
+      // "aerosol_4294967805": "{{host_url}}/v1/aerosol/4294967805/{z}/{x}/{y}",
+      // "aerosol_4294967806": "{{host_url}}/v1/aerosol/4294967806/{z}/{x}/{y}",
+      // "aerosol_4294967807": "{{host_url}}/v1/aerosol/4294967807/{z}/{x}/{y}",
+      // "aerosol_4294967808": "{{host_url}}/v1/aerosol/4294967808/{z}/{x}/{y}",
+      // "aerosol_4294967809": "{{host_url}}/v1/aerosol/4294967809/{z}/{x}/{y}",
+      // "aerosol_4294967810": "{{host_url}}/v1/aerosol/4294967810/{z}/{x}/{y}",
+      // "aerosol_4294967811": "{{host_url}}/v1/aerosol/4294967811/{z}/{x}/{y}",
+      // "aerosol_4294967812": "{{host_url}}/v1/aerosol/4294967812/{z}/{x}/{y}",
+      // "aerosol_4294967813": "{{host_url}}/v1/aerosol/4294967813/{z}/{x}/{y}",
+      // "aerosol_4294967814": "{{host_url}}/v1/aerosol/4294967814/{z}/{x}/{y}",
+      // "aerosol_4294967815": "{{host_url}}/v1/aerosol/4294967815/{z}/{x}/{y}",
+      // "aerosol_4294967816": "{{host_url}}/v1/aerosol/4294967816/{z}/{x}/{y}",
+      // "aerosol_4294967817": "{{host_url}}/v1/aerosol/4294967817/{z}/{x}/{y}",
+      // "aerosol_4294967818": "{{host_url}}/v1/aerosol/4294967818/{z}/{x}/{y}",
+      // "aerosol_4294967819": "{{host_url}}/v1/aerosol/4294967819/{z}/{x}/{y}",
+      // "aerosol_4294967820": "{{host_url}}/v1/aerosol/4294967820/{z}/{x}/{y}",
+      // "aerosol_4294967821": "{{host_url}}/v1/aerosol/4294967821/{z}/{x}/{y}",
+      // "aerosol_4294967822": "{{host_url}}/v1/aerosol/4294967822/{z}/{x}/{y}",
+      // "aerosol_4294967823": "{{host_url}}/v1/aerosol/4294967823/{z}/{x}/{y}",
+      // "aerosol_4294967824": "{{host_url}}/v1/aerosol/4294967824/{z}/{x}/{y}",
+      // "aerosol_4294967825": "{{host_url}}/v1/aerosol/4294967825/{z}/{x}/{y}",
+
+
+    }
+
+    map.on('load', function loaded() {
+      for (let i in layers) {
+        map.addSource(i, {
+          type: 'vector',
+          tiles: [layers[i]]
+        });
+
+        map.addLayer({
+          "id": i,
+          'type': 'fill',
+          "source": i,
+          "source-layer": i,
+          "paint": {
+            "fill-outline-color": "rgba(0, 0%, 0%, 0)",
+            // "fill-color": "rgba(0, 0%, 0%, 0.5)",
+            "fill-color": "rgba(34, 85, 96, 0.6)",
+            // "fill-color": [
+            //   'interpolate', 
+            //   ["linear"],
+            //   ['get', 'intensity'],
+            //   0, 
+            //   "rgba(34, 85, 96, 1)",
+            //   128, 
+            //   "rgba(0, 175, 84, 1)",
+            //   255, 
+            //   "rgba(237, 240, 96, 1)"
+            // ],
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
