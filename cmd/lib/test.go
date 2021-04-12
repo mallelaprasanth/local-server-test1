@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 
 	"github.com/gin-gonic/gin"
-	"github.com/local-server-test1/database"
+	"github.com/local-server-test1/cmd/database"
 )
 
 func InitDB() {

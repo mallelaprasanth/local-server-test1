@@ -30,6 +30,7 @@ func Connect(psqlInfo string) (err error) {
 	var retries = 0
 	for i := 0; i < backOffLimit; i++ {
 		conn, err = sql.Open("postgres", psqlInfo)
+
 		if err == nil {
 			break
 		}
@@ -39,9 +40,11 @@ func Connect(psqlInfo string) (err error) {
 		time.Sleep(time.Duration(wait) * time.Second)
 		retries++
 	}
+
 	if err != nil {
 		return err
 	}
+
 	return nil
 }
 
@@ -56,6 +59,7 @@ func Init() {
 	if err != nil {
 		panic(err)
 	}
+
 	err = ConnectRedis()
 	if err != nil {
 		panic(err)
@@ -72,6 +76,7 @@ func TestInit() {
 	if err != nil {
 		panic(err)
 	}
+
 	err = ConnectRedis()
 	if err != nil {
 		panic(err)
@@ -112,5 +117,7 @@ func ConnectRedis() error {
 		Password: os.Getenv("REDIS_PASS"),
 		DB:       int(rdsDB),
 	})
+
+	log.Printf("connected to Redis using DB ")
 	return nil
 }
